@@ -1,0 +1,41 @@
+.footer {
+  margin-top: 100px;
+  display: flex;
+}
+
+.total-price {
+  margin: 0 20px;
+  color: red;
+}
+
+.item .count-box .dec,
+.item .count-box .count {
+  visibility: hidden;
+}
+
+.item.active .count-box .dec,
+.item.active .count-box .count {
+  visibility: visible;
+}
+
+.need-cost,
+.settle {
+  visibility: hidden;
+}
+
+.need-cost.active,
+.settle.active {
+  visibility: visible;
+}
+
+.ani-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 1s ease-in;
+}
+
+.ani-icon span {
+  display: block;
+  transition: all 1s cubic-bezier(0.5, -0.5, 1, 1);
+}
