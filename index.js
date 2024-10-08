@@ -39,12 +39,12 @@ class MealData {
   }
 
   // 获取该菜品的总价格
-  getTotalPrice() {
+  get totalPrice() {
     return this.selectQuantity * this.data.price
   }
 
   // 判断是否添加了该菜品
-  isAddedToCart() {
+  get isAddedToCart() {
     return this.selectQuantity > 0
   }
 }
@@ -71,9 +71,9 @@ class PageData {
   }
 
   // 获取订单总额
-  getTotalPrice() {
+  get totalPrice() {
     return this.mealsList.reduce((prev, cur) => {
-      return prev + cur.getTotalPrice()
+      return prev + cur.totalPrice
     }, 0)
   }
 
@@ -84,19 +84,14 @@ class PageData {
     }, 0)
   }
 
-  // 判断购物车内是否为空
-  isCartEmpty() {
-    return this.getCartTotalNum() === 0
-  }
-
   // 判断是否满足起送金额
-  isCanDelivery() {
-    return this.getTotalPrice() >= this.minimumDeliveryAmount
+  get isCanDelivery() {
+    return this.totalPrice >= this.minimumDeliveryAmount
   }
 
   // 获取与起送金额的差额
   getNeedCostToDelivery() {
-    return this.minimumDeliveryAmount - this.getTotalPrice()
+    return this.minimumDeliveryAmount - this.totalPrice
   }
 }
 
@@ -172,7 +167,7 @@ class UIRender {
    */
   updateMealItem(index) {
     const itemDom = this.doms.list.children[index]
-    if (this.pageData.mealsList[index].isAddedToCart()) {
+    if (this.pageData.mealsList[index].isAddedToCart) {
       itemDom.classList.add('active')
     } else {
       itemDom.classList.remove('active')
@@ -186,8 +181,8 @@ class UIRender {
    * 更新底部购物车栏数据
    */
   updateCartBar() {
-    this.doms.totalPriceSpan.textContent = this.pageData.getTotalPrice()
-    if (this.pageData.isCanDelivery()) {
+    this.doms.totalPriceSpan.textContent = this.pageData.totalPrice
+    if (this.pageData.isCanDelivery) {
       this.doms.settle.classList.add('active')
       this.doms.needCost.classList.remove('active')
     } else {
